@@ -30,3 +30,11 @@
 *.exe
 *.out
 *.app
+
+.vscode/
+build/
+lib/external/*
+!lib/external/CMakeLists.txt
+CMakeFunctions.cmake
+DearImguiCMake.cmake
+example.cpp
