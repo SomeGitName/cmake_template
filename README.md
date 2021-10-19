@@ -8,7 +8,7 @@ Static linking:
 - [x] GLAD
 - [x] GLM
 - [x] SDL2
-- [ ] Dear ImGui
+- [x] Dear ImGui
 
 Dynamic linking:
 - [ ] GLFW

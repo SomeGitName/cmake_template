@@ -31,10 +31,11 @@
 *.out
 *.app
 
-.vscode/
+# Files starting with .
+.*
+!.gitignore
+
 build/
-lib/external/*
-!lib/external/CMakeLists.txt
-CMakeFunctions.cmake
-DearImguiCMake.cmake
-example.cpp
+lib/external/imgui/*
+!lib/external/imgui/CMakeLists.txt
+

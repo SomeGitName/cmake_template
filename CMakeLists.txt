@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(TestProject VERSION 0.1.0)
 
-include(${PROJECT_SOURCE_DIR}/CMakeFunctions.cmake)
 
+option(LINK_DEPS_STATIC CACHE ON)
 add_subdirectory(${PROJECT_SOURCE_DIR}/lib)
 
 
@@ -16,8 +16,23 @@ set(PROJECT_LIBS
     glfw
     glad
     glm
-    # SDL
-    # SDL2-static
-    # imgui # currently not working
+    # SDL::SDL
+
+    imgui
+
+    # imgui-sdl
+    imgui-glfw
+    # imgui-osx
+    # imgui-win32
+    # imgui-glut
+    # imgui-metal
+    imgui-opengl3
+    # imgui-opengl2
+    # imgui-vulkan
+    # imgui-dx9
+    # imgui-dx10
+    # imgui-dx11
+    # imgui-dx12
+
 )
 target_link_libraries(${PROJECT_NAME} PUBLIC ${PROJECT_LIBS})
