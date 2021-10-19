@@ -1,37 +1,9 @@
-
-#
-# Example of using Dear ImGui in your CMake project:
-#
-#   # Set various library options:
-#   set(IMGUI_SDL_TARGET sdl CACHE STRING "" FORCE)
-#   # Include Dear ImGui into build.
-#   add_subdirectory(path/to/imgui)
-#   <..>
-#   # Link Dear ImGui to your application:
-#   #  imgui - a main library target
-#   #  imgui-sdl - a platform backend target
-#   #  imgui-dx11 - a graphics backend target
-#   target_link_libraries(YourApplication PUBLIC imgui imgui-sdl imgui-dx11)
-#
-# A list of defined targets:
-#   imgui-sdl: platform backend for Windows/Linux/MacOS/etc using SDL2.
-#   imgui-glfw: platform backend for Windows/Linux/MacOS/etc using GLFW.
-#   imgui-osx: platform backend for MacOS.
-#   imgui-win32: platform backend for Windows.
-#   imgui-glut: platform backend for Windows/Linux/MacOS using glut/freeglut with OpenGL.
-#   imgui-metal: graphics backend for MacOS using Metal graphics API.
-#   imgui-opengl3: graphics backend for Windows/Linux/MacOS/etc using OpenGL3 graphics API.
-#   imgui-opengl2: graphics backend for Windows/Linux/MacOS/etc using OpenGL2 graphics API.
-#   imgui-vulkan: graphics backend for Windows/Linux/MacOS/etc using Vulkan graphics API.
-#   imgui-dx9: graphics backend for Windows using DirectX 9 graphics API.
-#   imgui-dx10: graphics backend for Windows using DirectX 10 graphics API.
-#   imgui-dx11: graphics backend for Windows using DirectX 11 graphics API.
-#   imgui-dx12: graphics backend for Windows using DirectX 12 graphics API.
-#
-cmake_minimum_required (VERSION 3.2)
-project (imgui)
-
-
+FetchContent_Declare(
+  imgui_external
+  GIT_REPOSITORY "https://github.com/ocornut/imgui"
+  GIT_TAG 55d35d8387c15bf0cfd71861df67af8cfbda7456 #"v1.85"
+) 
+FetchContent_MakeAvailable(imgui_external)
 
 # CMake: 3.13: option() honors normal variables. Sufficiently new CMake and this policy allow user to configure library
 # by setting plain variables as opposed to cache variables as demonstrated in example.
@@ -98,20 +70,11 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "GNU")
     add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-Wno-class-memaccess>)
 endif ()
 
-# Helper variables. They allow to use this CMakeLists.txt file while it is in examples or in root directory. You may
-# copy/symlink this file to imgui root directory in order to help IDEs like CLion to recognize headers as part of the
-# project.
-if (EXISTS ${CMAKE_CURRENT_LIST_DIR}/imgui.h)
-    # CMakeLists.txt is in root directory.
-    set (IMGUI_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR})
-    set (IMGUI_EXAMPLES_DIR ${IMGUI_ROOT_DIR}/examples)
-    set (IMGUI_BACKENDS_DIR ${IMGUI_ROOT_DIR}/backends)
-else ()
-    # CMakeLists.txt is in examples directory.
-    set (IMGUI_ROOT_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
-    set (IMGUI_EXAMPLES_DIR ${CMAKE_CURRENT_LIST_DIR})
-    set (IMGUI_BACKENDS_DIR ${CMAKE_CURRENT_LIST_DIR}/../backends)
-endif ()
+
+set (IMGUI_ROOT_DIR ${imgui_external_SOURCE_DIR})
+set (IMGUI_EXAMPLES_DIR ${IMGUI_ROOT_DIR}/examples)
+set (IMGUI_BACKENDS_DIR ${IMGUI_ROOT_DIR}/backends)
+
 
 # Set up main library
 add_library(imgui ${IMGUI_ROOT_DIR}/imgui.h ${IMGUI_ROOT_DIR}/imgui_internal.h ${IMGUI_ROOT_DIR}/imgui.cpp

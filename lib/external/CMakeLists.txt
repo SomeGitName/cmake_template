@@ -54,18 +54,7 @@ endif()
 # -------------------------------------------------------------------
 # imgui
 # -------------------------------------------------------------------
-
-
-FetchContent_Declare(
-  imgui_external
-  GIT_REPOSITORY "https://github.com/ocornut/imgui"
-  GIT_TAG 55d35d8387c15bf0cfd71861df67af8cfbda7456 #"v1.85"
-  SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/imgui"
-  )
-  
-# file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/imgui-cmake/CMakeLists.txt" DESTINATION "${CMAKE_CURRENT_SOURCE_DIR}/imgui/CMakeLists.txt")
-
-FetchContent_MakeAvailable(imgui_external)
+add_subdirectory(imgui)
 
 
 # -------------------------------------------------------------------
